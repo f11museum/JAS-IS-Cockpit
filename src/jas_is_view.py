@@ -73,23 +73,60 @@ def connectOnButton(self, button, dataref):
 def connectOffButton(self, button, dataref):
     button.pressed.connect(lambda: self.buttonReleased(dataref))
 
+
+class ColorButton():
+    def __init__(self, parent, button, dataref, color, type, lampDR=""):
+        self.parent = parent
+        self.button = button
+        self.dataref = dataref
+        self.color = color
+        self.type = type
+        if (lampDR==""):
+            self.lampdataref = self.dataref
+        else:
+            self.lampdataref = lampDR
+        
+        if (type == 0):
+            button.pressed.connect(self.onClickedToggle)
+        if (type == 1):
+            button.pressed.connect(self.buttonPressed)
+            button.released.connect(self.buttonReleased)
+        
+    def onClickedToggle(self):
+        prevvalue = self.parent.xp.getDataref(self.dataref, 1)
+        if (prevvalue == 1):
+            self.parent.xp.sendDataref(self.dataref, 0)
+        else:
+            self.parent.xp.sendDataref(self.dataref, 1)
+            
+    def buttonPressed(self):
+        print("buttonPressed2:", self.dataref)
+        self.parent.xp.sendDataref(self.dataref, 1)
+        
+    def buttonReleased(self):
+        print("buttonReleased2:", self.dataref)
+        self.parent.xp.sendDataref(self.dataref, 0)  
+        
+    def updateColor(self):
+        if (self.parent.xp.getDataref(self.lampdataref,2) >0):
+            self.button.setStyleSheet("background-color: "+self.color)
+        else:
+            self.button.setStyleSheet("background-color: white")
+        
+
 class RunGUI(QMainWindow):
     def __init__(self,):
         super(RunGUI,self).__init__()
 
-        self.initUI()
         
+        self.buttonList = []
         self.xp = XPlaneUdp.XPlaneUdp(XPLANE_IP,SEND_PORT)
         self.xp.getDataref("sim/flightmodel/position/indicated_airspeed",1)
 
         self.xp.getDataref("JAS/autopilot/att",1)
         self.xp.getDataref("JAS/lamps/hojd",1)
-        # self.xp.sendDataref("sim/cockpit/electrical/night_vision_on", 1)
-        # 
-        # self.xp.sendDataref("sim/cockpit/electrical/night_vision_on", 0)
-
-        # 
         
+        self.initUI()
         
     def initUI(self):
         #self.root = Tk() # for 2d drawing
@@ -102,27 +139,43 @@ class RunGUI(QMainWindow):
         #self.resize(640, 480)
         self.setWindowTitle("JAS IS View")
         
-        connectButton(self, self.ui.button_afk,"JAS/button/afk")
-        connectButton(self, self.ui.button_hojd,"JAS/button/hojd")
-        connectButton(self, self.ui.button_att,"JAS/button/att")
-        connectButton(self, self.ui.button_spak,"JAS/button/spak")
+        # connectButton(self, self.ui.button_afk,"JAS/button/afk")
+        # connectButton(self, self.ui.button_hojd,"JAS/button/hojd")
+        # connectButton(self, self.ui.button_att,"JAS/button/att")
+        # connectButton(self, self.ui.button_spak,"JAS/button/spak")
         connectButton(self, self.ui.button_start,"JAS/button/start")
         connectButton(self, self.ui.button_master,"JAS/button/master")
+        connectButton(self, self.ui.mot_fack,"JAS/system/mot/fack")
+        connectButton(self, self.ui.mot_rems,"JAS/system/mot/rems")
         
         
-        connectOnButton(self, self.ui.button_apu_on,"JAS/button/apu")
-        connectOffButton(self, self.ui.button_apu_off,"JAS/button/apu")
+        # connectOnButton(self, self.ui.button_apu_on,"JAS/button/apu")
+        #connectOffButton(self, self.ui.button_apu_off,"JAS/button/apu")
         connectOnButton(self, self.ui.button_ess_on,"JAS/button/ess")
-        connectOffButton(self, self.ui.button_ess_off,"JAS/button/ess")
+        #connectOffButton(self, self.ui.button_ess_off,"JAS/button/ess")
         connectOnButton(self, self.ui.button_hstrom_on,"JAS/button/hstrom")
-        connectOffButton(self, self.ui.button_hstrom_off,"JAS/button/hstrom")
+        #connectOffButton(self, self.ui.button_hstrom_off,"JAS/button/hstrom")
         connectOnButton(self, self.ui.button_lt_kran_on,"JAS/button/lt_kran")
-        connectOffButton(self, self.ui.button_lt_kran_off,"JAS/button/lt_kran")
+        #connectOffButton(self, self.ui.button_lt_kran_off,"JAS/button/lt_kran")
+        
+        self.buttonList.append( ColorButton(self,self.ui.buttonlamp_antikoll, "sim/cockpit/electrical/nav_lights_on", "yellow", 0) )
+        self.buttonList.append( ColorButton(self,self.ui.button_afk, "JAS/button/afk", "orange", 1, lampDR="JAS/lamps/afk") )
+        self.buttonList.append( ColorButton(self,self.ui.button_hojd, "JAS/button/hojd", "orange", 1, lampDR="JAS/lamps/hojd") )
+        self.buttonList.append( ColorButton(self,self.ui.button_att, "JAS/button/att", "orange", 1, lampDR="JAS/lamps/att") )
+        self.buttonList.append( ColorButton(self,self.ui.button_spak, "JAS/button/spak", "orange", 1, lampDR="JAS/lamps/spak") )
+        
+        self.buttonList.append( ColorButton(self,self.ui.button_apu_on, "JAS/button/apu", "green", 0) )
+        self.buttonList.append( ColorButton(self,self.ui.button_ess_on, "JAS/button/ess", "green", 0) )
+        self.buttonList.append( ColorButton(self,self.ui.button_hstrom_on, "JAS/button/hstrom", "green", 0) )
+        self.buttonList.append( ColorButton(self,self.ui.button_lt_kran_on, "JAS/button/lt_kran", "green", 0) )
+        self.buttonList.append( ColorButton(self,self.ui.dap_button_pluv, "JAS/system/dap/lamp/pluv", "green", 0) )
+        
         
         self.ui.button_tanka.clicked.connect(self.buttonTankaFull)
         self.ui.button_tanka_50.clicked.connect(self.buttonTanka50)
         
         self.ui.auto_afk_text.valueChanged.connect(self.autoAFK)
+        self.ui.auto_hojd_text.valueChanged.connect(self.autoHOJD)
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.loop)
@@ -131,25 +184,23 @@ class RunGUI(QMainWindow):
 
 
     def updateGUI(self):
+        for button in self.buttonList:
+            button.updateColor()
         # if (self.xp.dataList["JAS/lamps/hojd"] >0):
         #     self.ui.lamps_hojd.setStyleSheet("background-color: orange")
         # else:
         #     self.ui.lamps_hojd.setStyleSheet("background-color: white")
-        updateLamp(self, self.ui.lamps_afk, "JAS/lamps/afk", "orange")
-        updateLamp(self, self.ui.lamps_hojd, "JAS/lamps/hojd", "orange")
-        updateLamp(self, self.ui.lamps_att, "JAS/lamps/att", "orange")
-        updateLamp(self, self.ui.lamps_spak, "JAS/lamps/spak", "orange")
         
         updateLamp(self, self.ui.lamps_master1, "JAS/lamps/master1", "red")
         updateLamp(self, self.ui.lamps_master2, "JAS/lamps/master2", "red")
         
         updateLamp(self, self.ui.lamps_airbrake, "JAS/lamps/airbrake", "green")
         
-        updateLamp(self, self.ui.buttonlamp_lt_kran, "JAS/button/lt_kran", "green")
+        # updateLamp(self, self.ui.buttonlamp_lt_kran, "JAS/button/lt_kran", "green")
         updateLamp(self, self.ui.lamps_apu_gar, "JAS/lamps/apu_gar", "green")
-        updateLamp(self, self.ui.buttonlamp_apu, "JAS/button/apu", "green")
-        updateLamp(self, self.ui.buttonlamp_hstrom, "JAS/button/hstrom", "green")
-        updateLamp(self, self.ui.buttonlamp_ess, "JAS/button/ess", "green")
+        # updateLamp(self, self.ui.buttonlamp_apu, "JAS/button/apu", "green")
+        # updateLamp(self, self.ui.buttonlamp_hstrom, "JAS/button/hstrom", "green")
+        # updateLamp(self, self.ui.buttonlamp_ess, "JAS/button/ess", "green")
         
         
         updateLamp(self, self.ui.lamps_park, "sim/cockpit2/controls/parking_brake_ratio", "red")
@@ -219,7 +270,11 @@ class RunGUI(QMainWindow):
     def autoAFK(self):
         newvalue = float(self.ui.auto_afk_text.value()) / 1.85200
         self.xp.sendDataref("JAS/autopilot/afk", newvalue)
-            
+        
+    def autoHOJD(self):
+        newvalue = float(self.ui.auto_hojd_text.value()) / 0.3048
+        self.xp.sendDataref("JAS/autopilot/alt", newvalue)
+                
     def loop(self):
         self.xp.readData()
         self.updateGUI()
