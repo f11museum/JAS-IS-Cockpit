@@ -36,7 +36,10 @@ class XPlaneUdp:
                     singledata = data[(5+lenvalue*i):(5+lenvalue*(i+1))]
                     (idx,value) = struct.unpack("if", singledata)
                     #print("found values", idx, value)
-                    self.dataList[self.sendList[idx]] = value
+                    if idx<len(self.sendList):
+                        if self.sendList[idx] in self.dataList:
+                            self.dataList[self.sendList[idx]] = value
+                            #print("set ",self.sendList[idx], "value", value )
         except BlockingIOError:
             #print('no data')
             pass
@@ -67,7 +70,7 @@ class XPlaneUdp:
         self.sendList.append(dataref)
         self.dataList[dataref] = 0
         index = len(self.sendList) - 1
-        #print("getDataref ", index)
+        #print("createDataref ", index)
         message = b'RREF0'
         message = message + struct.pack("i", interval)
         message = message + struct.pack("i", index)
@@ -76,8 +79,6 @@ class XPlaneUdp:
         cmd = b"RREF\x00"
         message = struct.pack("<5sii400s", cmd, interval, index, bytestring)
         assert(len(message)==413)
-        #print(message)
-
-
+        #print(message[:50])
         self.sock.sendto(message, (self.xip, self.xport))
 

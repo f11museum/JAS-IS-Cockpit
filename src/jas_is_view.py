@@ -44,6 +44,19 @@ def signal_handler(sig, frame):
         sys.exit(0)
         os._exit(0)
 
+def updateSlider(self, lamp, dataref, type=1):
+    value = self.xp.getDataref(dataref,10)
+    
+    if (type == 1):
+        value = value*100 + 100
+    if (type == 2):
+        value = value*100
+    print("udpate slider", value)
+    lamp.setValue(int(value))
+
+def updateText(self, lamp, dataref):
+    value = self.xp.getDataref(dataref,1)
+    lamp.setText(str(int(value))+"%")
 
 def updateLamp(self, lamp, dataref, color):
     if (self.xp.getDataref(dataref,2) >0):
@@ -54,6 +67,11 @@ def updateLamp(self, lamp, dataref, color):
 def connectButton(self, button, dataref):
     button.pressed.connect(lambda: self.buttonPressed(dataref))
     button.released.connect(lambda: self.buttonReleased(dataref))
+    
+def connectOnButton(self, button, dataref):
+    button.pressed.connect(lambda: self.buttonPressed(dataref))
+def connectOffButton(self, button, dataref):
+    button.pressed.connect(lambda: self.buttonReleased(dataref))
 
 class RunGUI(QMainWindow):
     def __init__(self,):
@@ -81,14 +99,27 @@ class RunGUI(QMainWindow):
         self.ui = uic.loadUi(os.path.join(current_dir, "../ui/main.ui"), self)
         print(self.ui)
         #self.setGeometry(200, 200, 300, 300)
-        self.resize(640, 480)
+        #self.resize(640, 480)
         self.setWindowTitle("JAS IS View")
         
+        connectButton(self, self.ui.button_afk,"JAS/button/afk")
         connectButton(self, self.ui.button_hojd,"JAS/button/hojd")
         connectButton(self, self.ui.button_att,"JAS/button/att")
         connectButton(self, self.ui.button_spak,"JAS/button/spak")
         connectButton(self, self.ui.button_start,"JAS/button/start")
         
+        
+        connectOnButton(self, self.ui.button_apu_on,"JAS/button/apu")
+        connectOffButton(self, self.ui.button_apu_off,"JAS/button/apu")
+        connectOnButton(self, self.ui.button_ess_on,"JAS/button/ess")
+        connectOffButton(self, self.ui.button_ess_off,"JAS/button/ess")
+        connectOnButton(self, self.ui.button_hstrom_on,"JAS/button/hstrom")
+        connectOffButton(self, self.ui.button_hstrom_off,"JAS/button/hstrom")
+        connectOnButton(self, self.ui.button_lt_kran_on,"JAS/button/lt_kran")
+        connectOffButton(self, self.ui.button_lt_kran_off,"JAS/button/lt_kran")
+        
+        self.ui.button_tanka.clicked.connect(self.buttonTankaFull)
+        self.ui.button_tanka_50.clicked.connect(self.buttonTanka50)
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.loop)
@@ -101,6 +132,7 @@ class RunGUI(QMainWindow):
         #     self.ui.lamps_hojd.setStyleSheet("background-color: orange")
         # else:
         #     self.ui.lamps_hojd.setStyleSheet("background-color: white")
+        updateLamp(self, self.ui.lamps_afk, "JAS/lamps/afk", "orange")
         updateLamp(self, self.ui.lamps_hojd, "JAS/lamps/hojd", "orange")
         updateLamp(self, self.ui.lamps_att, "JAS/lamps/att", "orange")
         updateLamp(self, self.ui.lamps_spak, "JAS/lamps/spak", "orange")
@@ -110,8 +142,20 @@ class RunGUI(QMainWindow):
         
         updateLamp(self, self.ui.lamps_airbrake, "JAS/lamps/airbrake", "green")
         
-        updateLamp(self, self.ui.buttonlamp_apu, "JAS/button/apu", "green")
+        updateLamp(self, self.ui.buttonlamp_lt_kran, "JAS/button/lt_kran", "green")
         updateLamp(self, self.ui.lamps_apu_gar, "JAS/lamps/apu_gar", "green")
+        updateLamp(self, self.ui.buttonlamp_apu, "JAS/button/apu", "green")
+        updateLamp(self, self.ui.buttonlamp_hstrom, "JAS/button/hstrom", "green")
+        updateLamp(self, self.ui.buttonlamp_ess, "JAS/button/ess", "green")
+        
+        
+        updateText(self, self.ui.text_fuel, "JAS/fuel")
+        updateSlider(self, self.ui.spak_roll, "sim/joystick/yoke_roll_ratio", type=2)
+        updateSlider(self, self.ui.spak_pedaler, "sim/joystick/yoke_heading_ratio", type=2)
+        updateSlider(self, self.ui.spak_pitch, "sim/joystick/yoke_pitch_ratio", type=2)
+        updateSlider(self, self.ui.spak_gas, "sim/cockpit2/engine/actuators/throttle_ratio_all", type=2)
+        
+        
         
         pass
             
@@ -124,10 +168,16 @@ class RunGUI(QMainWindow):
         print("buttonReleased:", dataref)
         self.xp.sendDataref(dataref, 0)   
              
+    def buttonTankaFull(self):
+        self.xp.sendDataref("sim/flightmodel/weight/m_fuel1", 3000)
+    def buttonTanka50(self):
+        self.xp.sendDataref("sim/flightmodel/weight/m_fuel1", 1500)
+            
     def loop(self):
         self.xp.readData()
         self.updateGUI()
-        #print("loop")
+        
+        #print(self.xp.dataList)
         self.timer.start(10)
         pass
         

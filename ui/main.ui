@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>654</width>
-    <height>244</height>
+    <width>506</width>
+    <height>363</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,20 +15,85 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="1">
-     <spacer name="horizontalSpacer">
+    <item row="6" column="0">
+     <layout class="QGridLayout" name="gridLayout_5" columnminimumwidth="100,0">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetFixedSize</enum>
+      </property>
+      <item row="2" column="1">
+       <widget class="QSlider" name="spak_pitch">
+        <property name="minimum">
+         <number>-100</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="sliderPosition">
+         <number>4</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="invertedAppearance">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QSlider" name="spak_gas">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="2">
+       <widget class="QSlider" name="spak_roll">
+        <property name="minimum">
+         <number>-100</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="2">
+       <widget class="QSlider" name="spak_pedaler">
+        <property name="minimum">
+         <number>-100</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="2" column="0">
+     <spacer name="verticalSpacer">
       <property name="orientation">
-       <enum>Qt::Horizontal</enum>
+       <enum>Qt::Vertical</enum>
       </property>
       <property name="sizeHint" stdset="0">
        <size>
-        <width>40</width>
-        <height>20</height>
+        <width>20</width>
+        <height>40</height>
        </size>
       </property>
      </spacer>
     </item>
-    <item row="0" column="4">
+    <item row="6" column="1">
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="1" column="3">
        <widget class="QLabel" name="buttonlamp_apu">
@@ -123,72 +188,110 @@
       </item>
      </layout>
     </item>
-    <item row="0" column="0">
+    <item row="0" column="0" colspan="2">
      <layout class="QGridLayout" name="gridLayout">
-      <item row="3" column="3">
+      <item row="4" column="3">
        <widget class="QLabel" name="lamps_att">
         <property name="text">
          <string>ATT</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
-       <widget class="QLabel" name="lamps_gears">
-        <property name="text">
-         <string>Landställ</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="4">
-       <widget class="QPushButton" name="button_att">
-        <property name="text">
-         <string>ATT</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="4">
-       <widget class="QPushButton" name="button_spak">
-        <property name="text">
-         <string>SPAK</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="3">
+      <item row="1" column="1">
        <widget class="QLabel" name="lamps_master2">
         <property name="text">
          <string>Varning</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="2">
+      <item row="3" column="1">
+       <widget class="QLabel" name="lamps_gears">
+        <property name="text">
+         <string>Landställ</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
        <widget class="QLabel" name="lamps_master1">
         <property name="text">
          <string>Huvud</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="4">
+      <item row="4" column="4">
+       <widget class="QPushButton" name="button_att">
+        <property name="text">
+         <string>ATT</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QPushButton" name="button_master">
+        <property name="text">
+         <string>Kvittera Larm</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="4">
+       <widget class="QPushButton" name="button_afk">
+        <property name="text">
+         <string>AFK</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="4">
+       <widget class="QPushButton" name="button_spak">
+        <property name="text">
+         <string>SPAK</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
        <widget class="QLabel" name="lamps_airbrake">
         <property name="text">
          <string>Luftbroms</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="4">
-       <widget class="QPushButton" name="button_hojd">
+      <item row="2" column="3">
+       <widget class="QLabel" name="lamps_afk">
+        <property name="accessibleName">
+         <string>JAS/lamps/hojd</string>
+        </property>
         <property name="text">
-         <string>HOJD</string>
+         <string>AFK</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="3">
+      <item row="0" column="5">
+       <widget class="QPushButton" name="button_tanka">
+        <property name="text">
+         <string>Tanka Full</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QPushButton" name="button_start">
+        <property name="text">
+         <string>Motor Start</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="3">
        <widget class="QLabel" name="lamps_spak">
         <property name="text">
          <string>SPAK</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="3">
+      <item row="3" column="4">
+       <widget class="QPushButton" name="button_hojd">
+        <property name="text">
+         <string>HOJD</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="3">
        <widget class="QLabel" name="lamps_hojd">
         <property name="accessibleName">
          <string>JAS/lamps/hojd</string>
@@ -198,17 +301,32 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="2" colspan="2">
-       <widget class="QPushButton" name="button_master">
+      <item row="0" column="6">
+       <widget class="QLabel" name="label">
         <property name="text">
-         <string>Kvittera Larm</string>
+         <string>Bränsle</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
-       <widget class="QPushButton" name="button_start">
+      <item row="1" column="6">
+       <widget class="QLabel" name="text_fuel">
+        <property name="font">
+         <font>
+          <family>DejaVu Sans</family>
+          <pointsize>13</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="text">
-         <string>Motor Start</string>
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="5">
+       <widget class="QPushButton" name="button_tanka_50">
+        <property name="text">
+         <string>Tanka 50%</string>
         </property>
        </widget>
       </item>
@@ -221,7 +339,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>654</width>
+     <width>506</width>
      <height>19</height>
     </rect>
    </property>
