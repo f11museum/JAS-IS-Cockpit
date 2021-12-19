@@ -51,7 +51,7 @@ def updateSlider(self, lamp, dataref, type=1):
         value = value*100 + 100
     if (type == 2):
         value = value*100
-    print("udpate slider", value)
+    #print("udpate slider", value)
     lamp.setValue(int(value))
 
 def updateText(self, lamp, dataref):
@@ -107,6 +107,7 @@ class RunGUI(QMainWindow):
         connectButton(self, self.ui.button_att,"JAS/button/att")
         connectButton(self, self.ui.button_spak,"JAS/button/spak")
         connectButton(self, self.ui.button_start,"JAS/button/start")
+        connectButton(self, self.ui.button_master,"JAS/button/master")
         
         
         connectOnButton(self, self.ui.button_apu_on,"JAS/button/apu")
@@ -120,6 +121,8 @@ class RunGUI(QMainWindow):
         
         self.ui.button_tanka.clicked.connect(self.buttonTankaFull)
         self.ui.button_tanka_50.clicked.connect(self.buttonTanka50)
+        
+        self.ui.auto_afk_text.valueChanged.connect(self.autoAFK)
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.loop)
@@ -149,11 +152,51 @@ class RunGUI(QMainWindow):
         updateLamp(self, self.ui.buttonlamp_ess, "JAS/button/ess", "green")
         
         
+        updateLamp(self, self.ui.lamps_park, "sim/cockpit2/controls/parking_brake_ratio", "red")
+        
+        
         updateText(self, self.ui.text_fuel, "JAS/fuel")
         updateSlider(self, self.ui.spak_roll, "sim/joystick/yoke_roll_ratio", type=2)
         updateSlider(self, self.ui.spak_pedaler, "sim/joystick/yoke_heading_ratio", type=2)
         updateSlider(self, self.ui.spak_pitch, "sim/joystick/yoke_pitch_ratio", type=2)
         updateSlider(self, self.ui.spak_gas, "sim/cockpit2/engine/actuators/throttle_ratio_all", type=2)
+        
+        #self.ui.auto_afk_text.setValue(self.xp.getDataref("JAS/autopilot/afk",1))
+        
+        # VAT tablån
+        updateLamp(self, self.ui.vat_lamp_normsty, "JAS/system/vat/lamp/normsty", "orange")
+        updateLamp(self, self.ui.vat_lamp_luftsys, "JAS/system/vat/lamp/luftsys", "orange")
+        updateLamp(self, self.ui.vat_lamp_hhp1, "JAS/system/vat/lamp/hhp1", "orange")
+        updateLamp(self, self.ui.vat_lamp_hgen, "JAS/system/vat/lamp/hgen", "orange")
+        updateLamp(self, self.ui.vat_lamp_motor, "JAS/system/vat/lamp/motor", "orange")
+        updateLamp(self, self.ui.vat_lamp_dragkr, "JAS/system/vat/lamp/dragkr", "orange")
+        updateLamp(self, self.ui.vat_lamp_oljetr, "JAS/system/vat/lamp/oljetr", "orange")
+        
+        
+        updateLamp(self, self.ui.vat_lamp_abumod, "JAS/system/vat/lamp/abumod", "orange")
+        updateLamp(self, self.ui.vat_lamp_primdat, "JAS/system/vat/lamp/primdat", "orange")
+        updateLamp(self, self.ui.vat_lamp_hydr1, "JAS/system/vat/lamp/hydr1", "orange")
+        updateLamp(self, self.ui.vat_lamp_resgen, "JAS/system/vat/lamp/resgen", "orange")
+        updateLamp(self, self.ui.vat_lamp_mobrand, "JAS/system/vat/lamp/mobrand", "orange")
+        updateLamp(self, self.ui.vat_lamp_apu, "JAS/system/vat/lamp/apu", "orange")
+        updateLamp(self, self.ui.vat_lamp_apubrnd, "JAS/system/vat/lamp/apubrnd", "orange")
+        
+        # updateLamp(self, self.ui.vat_lamp_abumod, "JAS/system/vat/lamp/abumod", "orange")
+        # updateLamp(self, self.ui.vat_lamp_primdat, "JAS/system/vat/lamp/primdat", "orange")
+        # updateLamp(self, self.ui.vat_lamp_hydr1, "JAS/system/vat/lamp/hydr1", "orange")
+        updateLamp(self, self.ui.vat_lamp_likstrm, "JAS/system/vat/lamp/likstrm", "orange")
+        # updateLamp(self, self.ui.vat_lamp_mobrand, "JAS/system/vat/lamp/mobrand", "orange")
+        # updateLamp(self, self.ui.vat_lamp_apu, "JAS/system/vat/lamp/apu", "orange")
+        # updateLamp(self, self.ui.vat_lamp_apubrnd, "JAS/system/vat/lamp/apubrnd", "orange")
+        
+        # updateLamp(self, self.ui.vat_lamp_abumod, "JAS/system/vat/lamp/abumod", "orange")
+        # updateLamp(self, self.ui.vat_lamp_primdat, "JAS/system/vat/lamp/primdat", "orange")
+        # updateLamp(self, self.ui.vat_lamp_hydr1, "JAS/system/vat/lamp/hydr1", "orange")
+        updateLamp(self, self.ui.vat_lamp_brasys, "JAS/system/vat/lamp/brasys", "orange")
+        updateLamp(self, self.ui.vat_lamp_bramgd, "JAS/system/vat/lamp/bramgd", "orange")
+        # updateLamp(self, self.ui.vat_lamp_apu, "JAS/system/vat/lamp/apu", "orange")
+        # updateLamp(self, self.ui.vat_lamp_apubrnd, "JAS/system/vat/lamp/apubrnd", "orange")
+        
         
         
         
@@ -172,6 +215,10 @@ class RunGUI(QMainWindow):
         self.xp.sendDataref("sim/flightmodel/weight/m_fuel1", 3000)
     def buttonTanka50(self):
         self.xp.sendDataref("sim/flightmodel/weight/m_fuel1", 1500)
+        
+    def autoAFK(self):
+        newvalue = float(self.ui.auto_afk_text.value()) / 1.85200
+        self.xp.sendDataref("JAS/autopilot/afk", newvalue)
             
     def loop(self):
         self.xp.readData()
