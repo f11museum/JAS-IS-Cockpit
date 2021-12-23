@@ -59,6 +59,20 @@ class XPlaneUdp:
 
         self.sock.sendto(message, (self.xip, self.xport))
         
+    def sendCommand(self, dataref):
+        message = b'CMND0'
+        
+        bytestring = dataref.encode()
+        message = message + bytestring + b'\00'
+        #print(message)
+        
+        for i in range(509):
+            message = message+b'\x20'
+
+        message = message[:509]
+
+        self.sock.sendto(message, (self.xip, self.xport))
+        
     def getDataref(self, dataref, interval):
         if dataref not in self.dataList:
             self.createDataref(dataref, interval)

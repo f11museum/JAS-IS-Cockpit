@@ -68,6 +68,10 @@ def connectButton(self, button, dataref):
     button.pressed.connect(lambda: self.buttonPressed(dataref))
     button.released.connect(lambda: self.buttonReleased(dataref))
     
+def connectButtonCommand(self, button, dataref):
+    button.pressed.connect(lambda: self.buttonPressedCommand(dataref))
+    
+    
 def connectOnButton(self, button, dataref):
     button.pressed.connect(lambda: self.buttonPressed(dataref))
 def connectOffButton(self, button, dataref):
@@ -143,31 +147,32 @@ class RunGUI(QMainWindow):
         # connectButton(self, self.ui.button_hojd,"JAS/button/hojd")
         # connectButton(self, self.ui.button_att,"JAS/button/att")
         # connectButton(self, self.ui.button_spak,"JAS/button/spak")
-        connectButton(self, self.ui.button_start,"JAS/button/start")
-        connectButton(self, self.ui.button_master,"JAS/button/master")
+        connectButton(self, self.ui.button_start,"JAS/io/frontpanel/di/start")
+        connectButton(self, self.ui.button_master,"JAS/io/frontpanel/di/master")
         connectButton(self, self.ui.mot_fack,"JAS/system/mot/fack")
         connectButton(self, self.ui.mot_rems,"JAS/system/mot/rems")
+        connectButtonCommand(self, self.ui.button_reload_acf,"sim/operation/reload_aircraft_no_art")
         
         
         # connectOnButton(self, self.ui.button_apu_on,"JAS/button/apu")
         #connectOffButton(self, self.ui.button_apu_off,"JAS/button/apu")
-        connectOnButton(self, self.ui.button_ess_on,"JAS/button/ess")
+        #connectOnButton(self, self.ui.button_ess_on,"JAS/button/ess")
         #connectOffButton(self, self.ui.button_ess_off,"JAS/button/ess")
-        connectOnButton(self, self.ui.button_hstrom_on,"JAS/button/hstrom")
+        #connectOnButton(self, self.ui.button_hstrom_on,"JAS/button/hstrom")
         #connectOffButton(self, self.ui.button_hstrom_off,"JAS/button/hstrom")
-        connectOnButton(self, self.ui.button_lt_kran_on,"JAS/button/lt_kran")
+        #connectOnButton(self, self.ui.button_lt_kran_on,"JAS/button/lt_kran")
         #connectOffButton(self, self.ui.button_lt_kran_off,"JAS/button/lt_kran")
         
-        self.buttonList.append( ColorButton(self,self.ui.buttonlamp_antikoll, "sim/cockpit/electrical/nav_lights_on", "yellow", 0) )
-        self.buttonList.append( ColorButton(self,self.ui.button_afk, "JAS/button/afk", "orange", 1, lampDR="JAS/lamps/afk") )
-        self.buttonList.append( ColorButton(self,self.ui.button_hojd, "JAS/button/hojd", "orange", 1, lampDR="JAS/lamps/hojd") )
-        self.buttonList.append( ColorButton(self,self.ui.button_att, "JAS/button/att", "orange", 1, lampDR="JAS/lamps/att") )
-        self.buttonList.append( ColorButton(self,self.ui.button_spak, "JAS/button/spak", "orange", 1, lampDR="JAS/lamps/spak") )
+        #self.buttonList.append( ColorButton(self,self.ui.buttonlamp_antikoll, "sim/cockpit/electrical/nav_lights_on", "yellow", 0) )
+        self.buttonList.append( ColorButton(self,self.ui.button_afk, "JAS/io/frontpanel/di/afk", "orange", 1, lampDR="JAS/io/frontpanel/lo/afk") )
+        self.buttonList.append( ColorButton(self,self.ui.button_hojd, "JAS/io/frontpanel/di/hojd", "orange", 1, lampDR="JAS/io/frontpanel/lo/hojd") )
+        self.buttonList.append( ColorButton(self,self.ui.button_att, "JAS/io/frontpanel/di/att", "orange", 1, lampDR="JAS/io/frontpanel/lo/att") )
+        self.buttonList.append( ColorButton(self,self.ui.button_spak, "JAS/io/frontpanel/di/spak", "orange", 1, lampDR="JAS/io/frontpanel/lo/spak") )
         
-        self.buttonList.append( ColorButton(self,self.ui.button_apu_on, "JAS/button/apu", "green", 0) )
-        self.buttonList.append( ColorButton(self,self.ui.button_ess_on, "JAS/button/ess", "green", 0) )
-        self.buttonList.append( ColorButton(self,self.ui.button_hstrom_on, "JAS/button/hstrom", "green", 0) )
-        self.buttonList.append( ColorButton(self,self.ui.button_lt_kran_on, "JAS/button/lt_kran", "green", 0) )
+        self.buttonList.append( ColorButton(self,self.ui.button_apu_on, "JAS/io/vu22/di/apu", "green", 0) )
+        self.buttonList.append( ColorButton(self,self.ui.button_ess_on, "JAS/io/vu22/di/ess", "green", 0) )
+        self.buttonList.append( ColorButton(self,self.ui.button_hstrom_on, "JAS/io/vu22/di/hstrom", "green", 0) )
+        self.buttonList.append( ColorButton(self,self.ui.button_lt_kran_on, "JAS/io/vu22/di/ltbra", "green", 0) )
         self.buttonList.append( ColorButton(self,self.ui.dap_button_pluv, "JAS/system/dap/lamp/pluv", "green", 0) )
         
         
@@ -191,13 +196,14 @@ class RunGUI(QMainWindow):
         # else:
         #     self.ui.lamps_hojd.setStyleSheet("background-color: white")
         
-        updateLamp(self, self.ui.lamps_master1, "JAS/lamps/master1", "red")
-        updateLamp(self, self.ui.lamps_master2, "JAS/lamps/master2", "red")
+        updateLamp(self, self.ui.lamps_master1, "JAS/io/frontpanel/lo/master1", "red")
+        updateLamp(self, self.ui.lamps_master2, "JAS/io/frontpanel/lo/master2", "red")
         
-        updateLamp(self, self.ui.lamps_airbrake, "JAS/lamps/airbrake", "green")
+        updateLamp(self, self.ui.lamps_airbrake, "JAS/io/frontpanel/lo/airbrake", "green")
         
         # updateLamp(self, self.ui.buttonlamp_lt_kran, "JAS/button/lt_kran", "green")
-        updateLamp(self, self.ui.lamps_apu_gar, "JAS/lamps/apu_gar", "green")
+        updateLamp(self, self.ui.lamps_apu_gar, "JAS/io/vu22/lo/apugar", "green")
+        updateLamp(self, self.ui.lamps_apu_red, "JAS/io/vu22/lo/apured", "red")
         # updateLamp(self, self.ui.buttonlamp_apu, "JAS/button/apu", "green")
         # updateLamp(self, self.ui.buttonlamp_hstrom, "JAS/button/hstrom", "green")
         # updateLamp(self, self.ui.buttonlamp_ess, "JAS/button/ess", "green")
@@ -215,45 +221,48 @@ class RunGUI(QMainWindow):
         #self.ui.auto_afk_text.setValue(self.xp.getDataref("JAS/autopilot/afk",1))
         
         # VAT tablån
-        updateLamp(self, self.ui.vat_lamp_normsty, "JAS/system/vat/lamp/normsty", "orange")
-        updateLamp(self, self.ui.vat_lamp_luftsys, "JAS/system/vat/lamp/luftsys", "orange")
-        updateLamp(self, self.ui.vat_lamp_hhp1, "JAS/system/vat/lamp/hhp1", "orange")
-        updateLamp(self, self.ui.vat_lamp_hgen, "JAS/system/vat/lamp/hgen", "orange")
-        updateLamp(self, self.ui.vat_lamp_motor, "JAS/system/vat/lamp/motor", "orange")
-        updateLamp(self, self.ui.vat_lamp_dragkr, "JAS/system/vat/lamp/dragkr", "orange")
-        updateLamp(self, self.ui.vat_lamp_oljetr, "JAS/system/vat/lamp/oljetr", "orange")
+        updateLamp(self, self.ui.vat_lamp_normsty, "JAS/io/vat/lo/normsty", "orange")
+        updateLamp(self, self.ui.vat_lamp_luftsys, "JAS/io/vat/lo/luftsys", "orange")
+        updateLamp(self, self.ui.vat_lamp_hhp1, "JAS/io/vat/lo/hhp1", "orange")
+        updateLamp(self, self.ui.vat_lamp_hgen, "JAS/io/vat/lo/hgen", "orange")
+        updateLamp(self, self.ui.vat_lamp_motor, "JAS/io/vat/lo/motor", "orange")
+        updateLamp(self, self.ui.vat_lamp_dragkr, "JAS/io/vat/lo/dragkr", "orange")
+        updateLamp(self, self.ui.vat_lamp_oljetr, "JAS/io/vat/lo/oljetr", "orange")
         
         
-        updateLamp(self, self.ui.vat_lamp_abumod, "JAS/system/vat/lamp/abumod", "orange")
-        updateLamp(self, self.ui.vat_lamp_primdat, "JAS/system/vat/lamp/primdat", "orange")
-        updateLamp(self, self.ui.vat_lamp_hydr1, "JAS/system/vat/lamp/hydr1", "orange")
-        updateLamp(self, self.ui.vat_lamp_resgen, "JAS/system/vat/lamp/resgen", "orange")
-        updateLamp(self, self.ui.vat_lamp_mobrand, "JAS/system/vat/lamp/mobrand", "orange")
-        updateLamp(self, self.ui.vat_lamp_apu, "JAS/system/vat/lamp/apu", "orange")
-        updateLamp(self, self.ui.vat_lamp_apubrnd, "JAS/system/vat/lamp/apubrnd", "orange")
+        updateLamp(self, self.ui.vat_lamp_abumod, "JAS/io/vat/lo/abumod", "orange")
+        updateLamp(self, self.ui.vat_lamp_primdat, "JAS/io/vat/lo/primdat", "orange")
+        updateLamp(self, self.ui.vat_lamp_hydr1, "JAS/io/vat/lo/hydr1", "orange")
+        updateLamp(self, self.ui.vat_lamp_resgen, "JAS/io/vat/lo/resgen", "orange")
+        updateLamp(self, self.ui.vat_lamp_mobrand, "JAS/io/vat/lo/mobrand", "orange")
+        updateLamp(self, self.ui.vat_lamp_apu, "JAS/io/vat/lo/apu", "orange")
+        updateLamp(self, self.ui.vat_lamp_apubrnd, "JAS/io/vat/lo/apubrnd", "orange")
         
-        # updateLamp(self, self.ui.vat_lamp_abumod, "JAS/system/vat/lamp/abumod", "orange")
-        # updateLamp(self, self.ui.vat_lamp_primdat, "JAS/system/vat/lamp/primdat", "orange")
-        # updateLamp(self, self.ui.vat_lamp_hydr1, "JAS/system/vat/lamp/hydr1", "orange")
-        updateLamp(self, self.ui.vat_lamp_likstrm, "JAS/system/vat/lamp/likstrm", "orange")
-        # updateLamp(self, self.ui.vat_lamp_mobrand, "JAS/system/vat/lamp/mobrand", "orange")
-        # updateLamp(self, self.ui.vat_lamp_apu, "JAS/system/vat/lamp/apu", "orange")
-        # updateLamp(self, self.ui.vat_lamp_apubrnd, "JAS/system/vat/lamp/apubrnd", "orange")
+        # updateLamp(self, self.ui.vat_lamp_abumod, "JAS/io/vat/lo/abumod", "orange")
+        # updateLamp(self, self.ui.vat_lamp_primdat, "JAS/io/vat/lo/primdat", "orange")
+        # updateLamp(self, self.ui.vat_lamp_hydr1, "JAS/io/vat/lo/hydr1", "orange")
+        updateLamp(self, self.ui.vat_lamp_likstrm, "JAS/io/vat/lo/likstrm", "orange")
+        # updateLamp(self, self.ui.vat_lamp_mobrand, "JAS/io/vat/lo/mobrand", "orange")
+        # updateLamp(self, self.ui.vat_lamp_apu, "JAS/io/vat/lo/apu", "orange")
+        # updateLamp(self, self.ui.vat_lamp_apubrnd, "JAS/io/vat/lo/apubrnd", "orange")
         
-        # updateLamp(self, self.ui.vat_lamp_abumod, "JAS/system/vat/lamp/abumod", "orange")
-        # updateLamp(self, self.ui.vat_lamp_primdat, "JAS/system/vat/lamp/primdat", "orange")
-        # updateLamp(self, self.ui.vat_lamp_hydr1, "JAS/system/vat/lamp/hydr1", "orange")
-        updateLamp(self, self.ui.vat_lamp_brasys, "JAS/system/vat/lamp/brasys", "orange")
-        updateLamp(self, self.ui.vat_lamp_bramgd, "JAS/system/vat/lamp/bramgd", "orange")
-        # updateLamp(self, self.ui.vat_lamp_apu, "JAS/system/vat/lamp/apu", "orange")
-        # updateLamp(self, self.ui.vat_lamp_apubrnd, "JAS/system/vat/lamp/apubrnd", "orange")
+        updateLamp(self, self.ui.vat_lamp_felinfo, "JAS/io/vat/lo/felinfo", "orange")
+        updateLamp(self, self.ui.vat_lamp_dator, "JAS/io/vat/lo/dator", "orange")
+        # updateLamp(self, self.ui.vat_lamp_hydr1, "JAS/io/vat/lo/hydr1", "orange")
+        updateLamp(self, self.ui.vat_lamp_brasys, "JAS/io/vat/lo/brasys", "orange")
+        updateLamp(self, self.ui.vat_lamp_bramgd, "JAS/io/vat/lo/bramgd", "orange")
+        # updateLamp(self, self.ui.vat_lamp_apu, "JAS/io/vat/lo/apu", "orange")
+        # updateLamp(self, self.ui.vat_lamp_apubrnd, "JAS/io/vat/lo/apubrnd", "orange")
         
         
         
         
         pass
             
-            
+    def buttonPressedCommand(self, dataref):
+        print("buttonPressedCommand:", dataref)
+        self.xp.sendCommand(dataref)
+                    
     def buttonPressed(self, dataref):
         print("buttonPressed:", dataref)
         self.xp.sendDataref(dataref, 1)
