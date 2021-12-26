@@ -198,7 +198,7 @@
        </widget>
       </item>
       <item row="2" column="3">
-       <widget class="QLabel" name="label_20">
+       <widget class="QLabel" name="vat_lamp_streck2">
         <property name="text">
          <string>----</string>
         </property>
@@ -278,7 +278,7 @@
        </widget>
       </item>
       <item row="6" column="2">
-       <widget class="QLabel" name="label_28">
+       <widget class="QLabel" name="vat_lamp_streck1">
         <property name="text">
          <string>-----</string>
         </property>
@@ -453,7 +453,28 @@
     </item>
     <item row="0" column="0" colspan="2">
      <layout class="QGridLayout" name="gridLayout">
-      <item row="3" column="3">
+      <item row="0" column="5">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Bränsle</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="lamps_airbrake">
+        <property name="text">
+         <string>Luftbroms</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QPushButton" name="button_tanka">
+        <property name="text">
+         <string>Tanka Full</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="3">
        <widget class="QPushButton" name="button_hojd">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -466,7 +487,27 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="4">
+      <item row="1" column="0">
+       <widget class="QLabel" name="lamps_master1">
+        <property name="text">
+         <string>Huvud</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="3">
+       <widget class="QPushButton" name="button_afk">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>AFK</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="4">
        <widget class="QSpinBox" name="auto_hojd_text">
         <property name="maximum">
          <number>30000</number>
@@ -476,7 +517,34 @@
         </property>
        </widget>
       </item>
+      <item row="0" column="0">
+       <widget class="QPushButton" name="button_master">
+        <property name="text">
+         <string>Kvittera Larm</string>
+        </property>
+       </widget>
+      </item>
       <item row="5" column="3">
+       <widget class="QPushButton" name="button_att">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>ATT</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="4">
+       <widget class="QSpinBox" name="auto_afk_text">
+        <property name="maximum">
+         <number>3000</number>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="3">
        <widget class="QPushButton" name="button_spak">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -489,31 +557,17 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
+      <item row="1" column="1">
+       <widget class="QLabel" name="lamps_master2">
+        <property name="text">
+         <string>Varning</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
        <widget class="QLabel" name="lamps_gears">
         <property name="text">
          <string>Landställ</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="4">
-       <widget class="QPushButton" name="button_tanka">
-        <property name="text">
-         <string>Tanka Full</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QPushButton" name="button_master">
-        <property name="text">
-         <string>Kvittera Larm</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="5">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Bränsle</string>
         </property>
        </widget>
       </item>
@@ -521,27 +575,6 @@
        <widget class="QPushButton" name="button_tanka_50">
         <property name="text">
          <string>Tanka 50%</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="4">
-       <widget class="QSpinBox" name="auto_afk_text">
-        <property name="maximum">
-         <number>3000</number>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="lamps_airbrake">
-        <property name="text">
-         <string>Luftbroms</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="lamps_master1">
-        <property name="text">
-         <string>Huvud</string>
         </property>
        </widget>
       </item>
@@ -560,43 +593,17 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QLabel" name="lamps_master2">
+      <item row="5" column="0">
+       <widget class="QPushButton" name="button_start">
         <property name="text">
-         <string>Varning</string>
+         <string>Motor Start</string>
         </property>
        </widget>
       </item>
       <item row="2" column="3">
-       <widget class="QPushButton" name="button_afk">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
+       <widget class="QLabel" name="lamps_a14">
         <property name="text">
-         <string>AFK</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="3">
-       <widget class="QPushButton" name="button_att">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>ATT</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QPushButton" name="button_start">
-        <property name="text">
-         <string>Motor Start</string>
+         <string>A14</string>
         </property>
        </widget>
       </item>

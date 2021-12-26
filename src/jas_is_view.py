@@ -200,6 +200,7 @@ class RunGUI(QMainWindow):
         updateLamp(self, self.ui.lamps_master2, "JAS/io/frontpanel/lo/master2", "red")
         
         updateLamp(self, self.ui.lamps_airbrake, "JAS/io/frontpanel/lo/airbrake", "green")
+        updateLamp(self, self.ui.lamps_a14, "JAS/io/frontpanel/lo/a14", "orange")
         
         # updateLamp(self, self.ui.buttonlamp_lt_kran, "JAS/button/lt_kran", "green")
         updateLamp(self, self.ui.lamps_apu_gar, "JAS/io/vu22/lo/apugar", "green")
@@ -238,21 +239,21 @@ class RunGUI(QMainWindow):
         updateLamp(self, self.ui.vat_lamp_apu, "JAS/io/vat/lo/apu", "orange")
         updateLamp(self, self.ui.vat_lamp_apubrnd, "JAS/io/vat/lo/apubrnd", "orange")
         
-        # updateLamp(self, self.ui.vat_lamp_abumod, "JAS/io/vat/lo/abumod", "orange")
-        # updateLamp(self, self.ui.vat_lamp_primdat, "JAS/io/vat/lo/primdat", "orange")
-        # updateLamp(self, self.ui.vat_lamp_hydr1, "JAS/io/vat/lo/hydr1", "orange")
+        updateLamp(self, self.ui.vat_lamp_styrsak, "JAS/io/vat/lo/styrsak", "orange")
+        updateLamp(self, self.ui.vat_lamp_uppdrag, "JAS/io/vat/lo/uppdrag", "orange")
+        updateLamp(self, self.ui.vat_lamp_hydr2, "JAS/io/vat/lo/hydr2", "orange")
         updateLamp(self, self.ui.vat_lamp_likstrm, "JAS/io/vat/lo/likstrm", "orange")
-        # updateLamp(self, self.ui.vat_lamp_mobrand, "JAS/io/vat/lo/mobrand", "orange")
-        # updateLamp(self, self.ui.vat_lamp_apu, "JAS/io/vat/lo/apu", "orange")
-        # updateLamp(self, self.ui.vat_lamp_apubrnd, "JAS/io/vat/lo/apubrnd", "orange")
+        updateLamp(self, self.ui.vat_lamp_landst, "JAS/io/vat/lo/landst", "orange")
+        updateLamp(self, self.ui.vat_lamp_bromsar, "JAS/io/vat/lo/bromsar", "orange")
+        updateLamp(self, self.ui.vat_lamp_streck1, "JAS/io/vat/lo/streck1", "orange")
         
         updateLamp(self, self.ui.vat_lamp_felinfo, "JAS/io/vat/lo/felinfo", "orange")
         updateLamp(self, self.ui.vat_lamp_dator, "JAS/io/vat/lo/dator", "orange")
-        # updateLamp(self, self.ui.vat_lamp_hydr1, "JAS/io/vat/lo/hydr1", "orange")
+        updateLamp(self, self.ui.vat_lamp_streck2, "JAS/io/vat/lo/streck2", "orange")
         updateLamp(self, self.ui.vat_lamp_brasys, "JAS/io/vat/lo/brasys", "orange")
         updateLamp(self, self.ui.vat_lamp_bramgd, "JAS/io/vat/lo/bramgd", "orange")
-        # updateLamp(self, self.ui.vat_lamp_apu, "JAS/io/vat/lo/apu", "orange")
-        # updateLamp(self, self.ui.vat_lamp_apubrnd, "JAS/io/vat/lo/apubrnd", "orange")
+        updateLamp(self, self.ui.vat_lamp_oxykab, "JAS/io/vat/lo/oxykab", "orange")
+        updateLamp(self, self.ui.vat_lamp_huvstol, "JAS/io/vat/lo/huvstol", "orange")
         
         
         
