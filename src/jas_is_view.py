@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 from PyQt5.QtCore import QTimer,QDateTime, QFile, QTextStream
@@ -19,7 +21,7 @@ import XPlaneUdp
 
 LISTEN_PORT = 49005
 SEND_PORT = 49000
-XPLANE_IP = "192.168.0.18"
+XPLANE_IP = "192.168.0.130"
 
 
 # Egna  funktioner
@@ -149,8 +151,8 @@ class RunGUI(QMainWindow):
         # connectButton(self, self.ui.button_spak,"JAS/button/spak")
         connectButton(self, self.ui.button_start,"JAS/io/frontpanel/di/start")
         connectButton(self, self.ui.button_master,"JAS/io/frontpanel/di/master")
-        connectButton(self, self.ui.mot_fack,"JAS/system/mot/fack")
-        connectButton(self, self.ui.mot_rems,"JAS/system/mot/rems")
+        #connectButton(self, self.ui.mot_fack,"JAS/system/mot/fack")
+        #connectButton(self, self.ui.mot_rems,"JAS/system/mot/rems")
         connectButtonCommand(self, self.ui.button_reload_acf,"sim/operation/reload_aircraft_no_art")
         
         
@@ -173,7 +175,7 @@ class RunGUI(QMainWindow):
         self.buttonList.append( ColorButton(self,self.ui.button_ess_on, "JAS/io/vu22/di/ess", "green", 0) )
         self.buttonList.append( ColorButton(self,self.ui.button_hstrom_on, "JAS/io/vu22/di/hstrom", "green", 0) )
         self.buttonList.append( ColorButton(self,self.ui.button_lt_kran_on, "JAS/io/vu22/di/ltbra", "green", 0) )
-        self.buttonList.append( ColorButton(self,self.ui.dap_button_pluv, "JAS/system/dap/lamp/pluv", "green", 0) )
+        #self.buttonList.append( ColorButton(self,self.ui.dap_button_pluv, "JAS/system/dap/lamp/pluv", "green", 0) )
         
         
         self.ui.button_tanka.clicked.connect(self.buttonTankaFull)

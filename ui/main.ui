@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>728</width>
-    <height>458</height>
+    <width>753</width>
+    <height>461</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -336,38 +336,17 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="lamps_park">
-        <property name="text">
-         <string>Parkeringsbroms</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QPushButton" name="mot_rems">
-        <property name="text">
-         <string>REMS</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QPushButton" name="mot_fack">
-        <property name="text">
-         <string>FACK</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QPushButton" name="dap_button_pluv">
-        <property name="text">
-         <string>PLUV</string>
-        </property>
-       </widget>
-      </item>
       <item row="1" column="1">
        <widget class="QLabel" name="lamps_apu_red">
         <property name="text">
          <string>APU fel</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLabel" name="lamps_park">
+        <property name="text">
+         <string>Parkeringsbroms</string>
         </property>
        </widget>
       </item>
@@ -645,8 +624,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>728</width>
-     <height>19</height>
+     <width>753</width>
+     <height>22</height>
     </rect>
    </property>
   </widget>
