@@ -151,6 +151,10 @@ class RunGUI(QMainWindow):
         # connectButton(self, self.ui.button_spak,"JAS/button/spak")
         connectButton(self, self.ui.button_start,"JAS/io/frontpanel/di/start")
         connectButton(self, self.ui.button_master,"JAS/io/frontpanel/di/master")
+        
+        connectButton(self, self.ui.button_falltank,"JAS/io/vu22/di/falltank")
+        connectButton(self, self.ui.button_systest,"JAS/io/vu22/di/syst")
+        connectButton(self, self.ui.button_lamptest,"JAS/io/vu22/di/lampprov")
         #connectButton(self, self.ui.mot_fack,"JAS/system/mot/fack")
         #connectButton(self, self.ui.mot_rems,"JAS/system/mot/rems")
         connectButtonCommand(self, self.ui.button_reload_acf,"sim/operation/reload_aircraft_no_art")

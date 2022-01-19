@@ -4,10 +4,10 @@ import binascii
 import time
 
 
-LISTEN_PORT = 49005
+LISTEN_PORT = 49006
 SEND_PORT = 49000
-XPLANE_IP = "192.168.0.18"
 
+current_milli_time = lambda: int(round(time.time() * 1000))
 
 class XPlaneUdp:
     
@@ -20,8 +20,15 @@ class XPlaneUdp:
         self.sock.bind(("", LISTEN_PORT))
         self.sendList = []
         self.dataList = {}
+        self.lastDataTimer = current_milli_time()
+        self.connected = False
         
     def readData(self):
+        if (self.lastDataTimer+10000 < current_milli_time()):
+            if (self.connected == False):
+                print("reconnect")
+                self.sendList = []
+                self.dataList = {}
         try:
             data, addr = self.sock.recvfrom(1024)
             # print("received data:")
@@ -29,6 +36,8 @@ class XPlaneUdp:
             # print(data)
             header=data[0:5]
             if(header==b"RREF,"):
+                self.lastDataTimer = current_milli_time()
+                self.connected = True
                 values =data[5:]
                 lenvalue = 8
                 numvalues = int(len(values)/lenvalue)

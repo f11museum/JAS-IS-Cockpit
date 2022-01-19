@@ -302,51 +302,72 @@
     <item row="2" column="2">
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="3" column="2">
-       <widget class="QPushButton" name="button_hstrom_on">
-        <property name="text">
-         <string>HSTROM</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="2">
-       <widget class="QPushButton" name="button_ess_on">
-        <property name="text">
-         <string>ESS</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2">
        <widget class="QPushButton" name="button_apu_on">
         <property name="text">
          <string>APU</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="2">
-       <widget class="QPushButton" name="button_lt_kran_on">
-        <property name="text">
-         <string>LT KRAN</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QLabel" name="lamps_apu_gar">
-        <property name="text">
-         <string>APU GÅR</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
+      <item row="2" column="1">
        <widget class="QLabel" name="lamps_apu_red">
         <property name="text">
          <string>APU fel</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
+      <item row="6" column="2">
+       <widget class="QPushButton" name="button_systest">
+        <property name="text">
+         <string>SysTest</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="2">
+       <widget class="QPushButton" name="button_lamptest">
+        <property name="text">
+         <string>LampTest</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
        <widget class="QLabel" name="lamps_park">
         <property name="text">
          <string>Parkeringsbroms</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="2">
+       <widget class="QPushButton" name="button_ess_on">
+        <property name="text">
+         <string>ESS</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="button_lt_kran_on">
+        <property name="text">
+         <string>LT KRAN</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QPushButton" name="button_hstrom_on">
+        <property name="text">
+         <string>HSTROM</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QLabel" name="lamps_apu_gar">
+        <property name="text">
+         <string>APU GÅR</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="button_falltank">
+        <property name="text">
+         <string>Fällning Tank</string>
         </property>
        </widget>
       </item>
@@ -625,7 +646,7 @@
      <x>0</x>
      <y>0</y>
      <width>753</width>
-     <height>22</height>
+     <height>19</height>
     </rect>
    </property>
   </widget>
