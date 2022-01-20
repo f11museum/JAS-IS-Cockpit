@@ -19,9 +19,9 @@ from pathlib import Path
 import XPlaneUdp
 
 
-LISTEN_PORT = 49005
+#LISTEN_PORT = 49006
 SEND_PORT = 49000
-XPLANE_IP = "192.168.0.130"
+XPLANE_IP = "192.168.0.19"
 
 
 # Egna  funktioner
@@ -29,16 +29,13 @@ current_milli_time = lambda: int(round(time.time() * 1000))
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--nogui", help="Run without GUI", action="store_true")
-parser.add_argument("--file", help="Run selected file, use with --nogui")
+
+parser.add_argument("--ip", help="Ip address of X-plane")
 args = parser.parse_args()
-if args.nogui:
-    GUI = False
-    print("GUI turned off")
-else:
-    GUI = True
 
-
+if args.ip:
+    XPLANE_IP = args.ip
+print ("Connecting to ", XPLANE_IP)
 
 def signal_handler(sig, frame):
         print("You pressed Ctrl+C!")
@@ -170,6 +167,7 @@ class RunGUI(QMainWindow):
         #connectOffButton(self, self.ui.button_lt_kran_off,"JAS/button/lt_kran")
         
         #self.buttonList.append( ColorButton(self,self.ui.buttonlamp_antikoll, "sim/cockpit/electrical/nav_lights_on", "yellow", 0) )
+        
         self.buttonList.append( ColorButton(self,self.ui.button_afk, "JAS/io/frontpanel/di/afk", "orange", 1, lampDR="JAS/io/frontpanel/lo/afk") )
         self.buttonList.append( ColorButton(self,self.ui.button_hojd, "JAS/io/frontpanel/di/hojd", "orange", 1, lampDR="JAS/io/frontpanel/lo/hojd") )
         self.buttonList.append( ColorButton(self,self.ui.button_att, "JAS/io/frontpanel/di/att", "orange", 1, lampDR="JAS/io/frontpanel/lo/att") )
@@ -180,6 +178,8 @@ class RunGUI(QMainWindow):
         self.buttonList.append( ColorButton(self,self.ui.button_hstrom_on, "JAS/io/vu22/di/hstrom", "green", 0) )
         self.buttonList.append( ColorButton(self,self.ui.button_lt_kran_on, "JAS/io/vu22/di/ltbra", "green", 0) )
         #self.buttonList.append( ColorButton(self,self.ui.dap_button_pluv, "JAS/system/dap/lamp/pluv", "green", 0) )
+        
+        
         
         
         self.ui.button_tanka.clicked.connect(self.buttonTankaFull)
@@ -210,6 +210,7 @@ class RunGUI(QMainWindow):
         
         updateLamp(self, self.ui.lamps_airbrake, "JAS/io/frontpanel/lo/airbrake", "green")
         updateLamp(self, self.ui.lamps_a14, "JAS/io/frontpanel/lo/a14", "orange")
+        updateLamp(self, self.ui.lamps_ks, "JAS/io/frontpanel/lo/ks", "orange")
         
         # updateLamp(self, self.ui.buttonlamp_lt_kran, "JAS/button/lt_kran", "green")
         updateLamp(self, self.ui.lamps_apu_gar, "JAS/io/vu22/lo/apugar", "green")
