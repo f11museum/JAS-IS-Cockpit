@@ -205,6 +205,9 @@ class RunGUI(QMainWindow):
         updateLamp(self, self.ui.lamps_master1, "JAS/io/frontpanel/lo/master1", "red")
         updateLamp(self, self.ui.lamps_master2, "JAS/io/frontpanel/lo/master2", "red")
         
+        
+        updateLamp(self, self.ui.lamps_hojdvarn, "JAS/io/frontpanel/lo/hojdvarn", "red")
+        
         updateLamp(self, self.ui.lamps_airbrake, "JAS/io/frontpanel/lo/airbrake", "green")
         updateLamp(self, self.ui.lamps_a14, "JAS/io/frontpanel/lo/a14", "orange")
         
