@@ -21,7 +21,7 @@ import XPlaneUdp
 
 #LISTEN_PORT = 49006
 SEND_PORT = 49000
-XPLANE_IP = "192.168.0.19"
+XPLANE_IP = "192.168.42.100"
 
 
 # Egna  funktioner
@@ -177,6 +177,12 @@ class RunGUI(QMainWindow):
         self.buttonList.append( ColorButton(self,self.ui.button_ess_on, "JAS/io/vu22/di/ess", "green", 0) )
         self.buttonList.append( ColorButton(self,self.ui.button_hstrom_on, "JAS/io/vu22/di/hstrom", "green", 0) )
         self.buttonList.append( ColorButton(self,self.ui.button_lt_kran_on, "JAS/io/vu22/di/ltbra", "green", 0) )
+        
+        self.buttonList.append( ColorButton(self,self.ui.button_mkv, "JAS/io/vu22/di/mkv", "orange", 1, lampDR="JAS/io/vu22/lamp/mkv") )
+        self.buttonList.append( ColorButton(self,self.ui.button_rhm, "JAS/io/vu22/di/rhm", "orange", 1, lampDR="JAS/io/vu22/lamp/rhm") )
+        self.buttonList.append( ColorButton(self,self.ui.button_sand, "JAS/io/vu22/di/sand", "orange", 1, lampDR="JAS/io/vu22/lamp/sand") )
+        
+        
         #self.buttonList.append( ColorButton(self,self.ui.dap_button_pluv, "JAS/system/dap/lamp/pluv", "green", 0) )
         
         
