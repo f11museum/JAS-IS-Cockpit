@@ -21,7 +21,7 @@ import XPlaneUdp
 
 #LISTEN_PORT = 49006
 SEND_PORT = 49000
-XPLANE_IP = "192.168.42.100"
+XPLANE_IP = "192.168.0.18"
 
 
 # Egna  funktioner
@@ -154,6 +154,22 @@ class RunGUI(QMainWindow):
         connectButton(self, self.ui.button_lamptest,"JAS/io/vu22/di/lampprov")
         #connectButton(self, self.ui.mot_fack,"JAS/system/mot/fack")
         #connectButton(self, self.ui.mot_rems,"JAS/system/mot/rems")
+        
+        
+        connectButton(self, self.ui.mfdButton1,"JAS/io/ti/knapp/knappram[0]")
+        connectButton(self, self.ui.mfdButton2,"JAS/io/ti/knapp/knappram[1]")
+        connectButton(self, self.ui.mfdButton3,"JAS/io/ti/knapp/knappram[2]")
+        connectButton(self, self.ui.mfdButton4,"JAS/io/ti/knapp/knappram[3]")
+        connectButton(self, self.ui.mfdButton5,"JAS/io/ti/knapp/knappram[4]")
+        connectButton(self, self.ui.mfdButton6,"JAS/io/ti/knapp/knappram[5]")
+    
+        connectButton(self, self.ui.mfdButton7,"JAS/io/ti/knapp/knappram[6]")
+        connectButton(self, self.ui.mfdButton8,"JAS/io/ti/knapp/knappram[7]")
+        connectButton(self, self.ui.mfdButton9,"JAS/io/ti/knapp/knappram[8]")
+        connectButton(self, self.ui.mfdButton0,"JAS/io/ti/knapp/knappram[9]")
+        connectButton(self, self.ui.mfdButton12,"JAS/io/ti/knapp/knappram[10]")
+        connectButton(self, self.ui.mfdButton11,"JAS/io/ti/knapp/knappram[11]")
+        
         connectButtonCommand(self, self.ui.button_reload_acf,"sim/operation/reload_aircraft_no_art")
         
         
