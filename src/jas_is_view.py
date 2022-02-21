@@ -3,6 +3,7 @@
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 from PyQt5.QtCore import QTimer,QDateTime, QFile, QTextStream, Qt
+from PyQt5.QtGui import QFont
 
 import sys
 import json
@@ -58,33 +59,36 @@ def updateText(self, lamp, dataref):
     lamp.setText(str(int(value))+"%")
 
 def updateLamp(self, lamp, dataref, color):
+    font = QFont("Sans")
+    font.setPointSize(12)
+    lamp.setFont(font)
     if (self.xp.getDataref(dataref,2) >0):
         lamp.setStyleSheet("background-color: "+color)
     else:
-        lamp.setStyleSheet("background-color: white")
+        lamp.setStyleSheet("background-color: #AAAAAA")
     
 def connectButton(self, button, dataref):
     font = button.font()
-    font.setPointSize(16)
+    font.setPointSize(12)
     button.setFont(font)
     button.pressed.connect(lambda: self.buttonPressed(dataref))
     button.released.connect(lambda: self.buttonReleased(dataref))
     
 def connectButtonCommand(self, button, dataref):
     font = button.font()
-    font.setPointSize(16)
+    font.setPointSize(12)
     button.setFont(font)
     button.pressed.connect(lambda: self.buttonPressedCommand(dataref))
     
     
 def connectOnButton(self, button, dataref):
     font = button.font()
-    font.setPointSize(16)
+    font.setPointSize(12)
     button.setFont(font)
     button.pressed.connect(lambda: self.buttonPressed(dataref))
 def connectOffButton(self, button, dataref):
     font = button.font()
-    font.setPointSize(16)
+    font.setPointSize(12)
     button.setFont(font)
     button.pressed.connect(lambda: self.buttonReleased(dataref))
 
@@ -92,7 +96,7 @@ def connectOffButton(self, button, dataref):
 class ColorButton():
     def __init__(self, parent, button, dataref, color, type, lampDR=""):
         font = button.font()
-        font.setPointSize(16)
+        font.setPointSize(12)
         button.setFont(font)
         self.parent = parent
         self.button = button
@@ -129,7 +133,7 @@ class ColorButton():
         if (self.parent.xp.getDataref(self.lampdataref,2) >0):
             self.button.setStyleSheet("background-color: "+self.color)
         else:
-            self.button.setStyleSheet("background-color: white")
+            self.button.setStyleSheet("background-color: #bbbbbb")
         
 
 class RunGUI(QMainWindow):
@@ -207,6 +211,10 @@ class RunGUI(QMainWindow):
         self.ui.auto_afk_text.valueChanged.connect(self.autoAFK)
         self.ui.auto_hojd_text.valueChanged.connect(self.autoHOJD)
 
+        font = QFont("Sans")
+        font.setPointSize(12)
+        self.setFont(font)
+        
         self.timer = QTimer()
         self.timer.timeout.connect(self.loop)
         self.timer.start(100)
@@ -283,6 +291,12 @@ class RunGUI(QMainWindow):
         updateLamp(self, self.ui.vat_lamp_bramgd, "JAS/io/vat/lo/bramgd", "orange")
         updateLamp(self, self.ui.vat_lamp_oxykab, "JAS/io/vat/lo/oxykab", "orange")
         updateLamp(self, self.ui.vat_lamp_huvstol, "JAS/io/vat/lo/huvstol", "orange")
+        
+        # ST
+        
+        updateLamp(self, self.ui.st_lamp_j, "JAS/io/st/lo/J", "orange")
+        updateLamp(self, self.ui.st_lamp_a, "JAS/io/st/lo/A", "orange")
+        updateLamp(self, self.ui.st_lamp_s, "JAS/io/st/lo/S", "orange")
         
         
         
