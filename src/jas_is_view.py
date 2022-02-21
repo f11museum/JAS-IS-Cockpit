@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
-from PyQt5.QtCore import QTimer,QDateTime, QFile, QTextStream
+from PyQt5.QtCore import QTimer,QDateTime, QFile, QTextStream, Qt
 
 import sys
 import json
@@ -64,21 +64,36 @@ def updateLamp(self, lamp, dataref, color):
         lamp.setStyleSheet("background-color: white")
     
 def connectButton(self, button, dataref):
+    font = button.font()
+    font.setPointSize(16)
+    button.setFont(font)
     button.pressed.connect(lambda: self.buttonPressed(dataref))
     button.released.connect(lambda: self.buttonReleased(dataref))
     
 def connectButtonCommand(self, button, dataref):
+    font = button.font()
+    font.setPointSize(16)
+    button.setFont(font)
     button.pressed.connect(lambda: self.buttonPressedCommand(dataref))
     
     
 def connectOnButton(self, button, dataref):
+    font = button.font()
+    font.setPointSize(16)
+    button.setFont(font)
     button.pressed.connect(lambda: self.buttonPressed(dataref))
 def connectOffButton(self, button, dataref):
+    font = button.font()
+    font.setPointSize(16)
+    button.setFont(font)
     button.pressed.connect(lambda: self.buttonReleased(dataref))
 
 
 class ColorButton():
     def __init__(self, parent, button, dataref, color, type, lampDR=""):
+        font = button.font()
+        font.setPointSize(16)
+        button.setFont(font)
         self.parent = parent
         self.button = button
         self.dataref = dataref
@@ -140,7 +155,9 @@ class RunGUI(QMainWindow):
         print(self.ui)
         #self.setGeometry(200, 200, 300, 300)
         #self.resize(640, 480)
-        self.setWindowTitle("JAS IS View")
+        self.setWindowTitle("JAS IS Cockpit")
+        self.setWindowFlags(Qt.WindowStaysOnTopHint)
+        
         
         # connectButton(self, self.ui.button_afk,"JAS/button/afk")
         # connectButton(self, self.ui.button_hojd,"JAS/button/hojd")
@@ -156,32 +173,12 @@ class RunGUI(QMainWindow):
         #connectButton(self, self.ui.mot_rems,"JAS/system/mot/rems")
         
         
-        connectButton(self, self.ui.mfdButton1,"JAS/io/ti/knapp/knappram[0]")
-        connectButton(self, self.ui.mfdButton2,"JAS/io/ti/knapp/knappram[1]")
-        connectButton(self, self.ui.mfdButton3,"JAS/io/ti/knapp/knappram[2]")
-        connectButton(self, self.ui.mfdButton4,"JAS/io/ti/knapp/knappram[3]")
-        connectButton(self, self.ui.mfdButton5,"JAS/io/ti/knapp/knappram[4]")
-        connectButton(self, self.ui.mfdButton6,"JAS/io/ti/knapp/knappram[5]")
-    
-        connectButton(self, self.ui.mfdButton7,"JAS/io/ti/knapp/knappram[6]")
-        connectButton(self, self.ui.mfdButton8,"JAS/io/ti/knapp/knappram[7]")
-        connectButton(self, self.ui.mfdButton9,"JAS/io/ti/knapp/knappram[8]")
-        connectButton(self, self.ui.mfdButton0,"JAS/io/ti/knapp/knappram[9]")
-        connectButton(self, self.ui.mfdButton12,"JAS/io/ti/knapp/knappram[10]")
-        connectButton(self, self.ui.mfdButton11,"JAS/io/ti/knapp/knappram[11]")
+
         
         connectButtonCommand(self, self.ui.button_reload_acf,"sim/operation/reload_aircraft_no_art")
         
         
-        # connectOnButton(self, self.ui.button_apu_on,"JAS/button/apu")
-        #connectOffButton(self, self.ui.button_apu_off,"JAS/button/apu")
-        #connectOnButton(self, self.ui.button_ess_on,"JAS/button/ess")
-        #connectOffButton(self, self.ui.button_ess_off,"JAS/button/ess")
-        #connectOnButton(self, self.ui.button_hstrom_on,"JAS/button/hstrom")
-        #connectOffButton(self, self.ui.button_hstrom_off,"JAS/button/hstrom")
-        #connectOnButton(self, self.ui.button_lt_kran_on,"JAS/button/lt_kran")
-        #connectOffButton(self, self.ui.button_lt_kran_off,"JAS/button/lt_kran")
-        
+
         #self.buttonList.append( ColorButton(self,self.ui.buttonlamp_antikoll, "sim/cockpit/electrical/nav_lights_on", "yellow", 0) )
         
         self.buttonList.append( ColorButton(self,self.ui.button_afk, "JAS/io/frontpanel/di/afk", "orange", 1, lampDR="JAS/io/frontpanel/lo/afk") )
@@ -246,11 +243,11 @@ class RunGUI(QMainWindow):
         
         
         updateText(self, self.ui.text_fuel, "JAS/fuel")
-        updateSlider(self, self.ui.spak_roll, "sim/joystick/yoke_roll_ratio", type=2)
-        updateSlider(self, self.ui.spak_pedaler, "sim/joystick/yoke_heading_ratio", type=2)
-        updateSlider(self, self.ui.spak_pitch, "sim/joystick/yoke_pitch_ratio", type=2)
-        updateSlider(self, self.ui.spak_gas, "sim/cockpit2/engine/actuators/throttle_ratio_all", type=2)
-        
+        # updateSlider(self, self.ui.spak_roll, "sim/joystick/yoke_roll_ratio", type=2)
+        # updateSlider(self, self.ui.spak_pedaler, "sim/joystick/yoke_heading_ratio", type=2)
+        # updateSlider(self, self.ui.spak_pitch, "sim/joystick/yoke_pitch_ratio", type=2)
+        # updateSlider(self, self.ui.spak_gas, "sim/cockpit2/engine/actuators/throttle_ratio_all", type=2)
+        # 
         #self.ui.auto_afk_text.setValue(self.xp.getDataref("JAS/autopilot/afk",1))
         
         # VAT tablån
