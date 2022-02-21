@@ -175,6 +175,8 @@ class RunGUI(QMainWindow):
         connectButton(self, self.ui.button_lamptest,"JAS/io/vu22/di/lampprov")
         #connectButton(self, self.ui.mot_fack,"JAS/system/mot/fack")
         #connectButton(self, self.ui.mot_rems,"JAS/system/mot/rems")
+        connectButton(self, self.ui.mfdButton11,"JAS/io/ti/knapp/knappram[11]")
+        connectButton(self, self.ui.mfdButton12,"JAS/io/ti/knapp/knappram[10]")
         
         
 
