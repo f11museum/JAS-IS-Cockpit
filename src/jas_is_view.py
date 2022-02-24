@@ -92,6 +92,9 @@ def connectOffButton(self, button, dataref):
     button.setFont(font)
     button.pressed.connect(lambda: self.buttonReleased(dataref))
 
+def connectValueButton(self, button, dataref, value):
+    button.pressed.connect(lambda: self.buttonPressedValue(dataref, value))
+
 
 class ColorButton():
     def __init__(self, parent, button, dataref, color, type, lampDR=""):
@@ -179,6 +182,9 @@ class RunGUI(QMainWindow):
         connectButton(self, self.ui.mfdButton12,"JAS/io/ti/knapp/knappram[10]")
         
         
+        
+        connectValueButton(self, self.ui.luft_in,"sim/cockpit2/controls/speedbrake_ratio", 0)
+        connectValueButton(self, self.ui.luft_ut,"sim/cockpit2/controls/speedbrake_ratio", 1)
 
         
         connectButtonCommand(self, self.ui.button_reload_acf,"sim/operation/reload_aircraft_no_art")
@@ -237,7 +243,7 @@ class RunGUI(QMainWindow):
         
         updateLamp(self, self.ui.lamps_hojdvarn, "JAS/io/frontpanel/lo/hojdvarn", "red")
         
-        updateLamp(self, self.ui.lamps_airbrake, "JAS/io/frontpanel/lo/airbrake", "green")
+        updateLamp(self, self.ui.lamps_airbrake, "JAS/io/frontpanel/lo/airbrake", "lightgreen")
         updateLamp(self, self.ui.lamps_a14, "JAS/io/frontpanel/lo/a14", "orange")
         updateLamp(self, self.ui.lamps_ks, "JAS/io/frontpanel/lo/ks", "orange")
         
@@ -250,6 +256,7 @@ class RunGUI(QMainWindow):
         
         
         updateLamp(self, self.ui.lamps_park, "sim/cockpit2/controls/parking_brake_ratio", "red")
+        updateLamp(self, self.ui.lamps_gears, "sim/cockpit/switches/gear_handle_status", "lightgreen")
         
         
         updateText(self, self.ui.text_fuel, "JAS/fuel")
@@ -304,7 +311,12 @@ class RunGUI(QMainWindow):
         
         
         pass
-            
+        
+        
+    def buttonPressedValue(self, dataref, value):
+        print("buttonPressed:", dataref)
+        self.xp.sendDataref(dataref, value)
+                             
     def buttonPressedCommand(self, dataref):
         print("buttonPressedCommand:", dataref)
         self.xp.sendCommand(dataref)
