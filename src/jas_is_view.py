@@ -187,7 +187,7 @@ class RunGUI(QMainWindow):
         connectValueButton(self, self.ui.luft_ut,"sim/cockpit2/controls/speedbrake_ratio", 1)
 
         
-        connectButtonCommand(self, self.ui.button_reload_acf,"sim/operation/reload_aircraft_no_art")
+        # connectButtonCommand(self, self.ui.button_reload_acf,"sim/operation/reload_aircraft_no_art")
         
         
 
@@ -207,6 +207,11 @@ class RunGUI(QMainWindow):
         self.buttonList.append( ColorButton(self,self.ui.button_rhm, "JAS/io/vu22/di/rhm", "orange", 1, lampDR="JAS/io/vu22/lamp/rhm") )
         self.buttonList.append( ColorButton(self,self.ui.button_sand, "JAS/io/vu22/di/sand", "orange", 1, lampDR="JAS/io/vu22/lamp/sand") )
         
+        
+        
+        self.buttonList.append( ColorButton(self,self.ui.button_j, "JAS/io/st/di/J", "orange", 1, lampDR="JAS/io/st/lo/J") )
+        self.buttonList.append( ColorButton(self,self.ui.button_a, "JAS/io/st/di/A", "orange", 1, lampDR="JAS/io/st/lo/A") )
+        self.buttonList.append( ColorButton(self,self.ui.button_s, "JAS/io/st/di/S", "orange", 1, lampDR="JAS/io/st/lo/S") )
         
         #self.buttonList.append( ColorButton(self,self.ui.dap_button_pluv, "JAS/system/dap/lamp/pluv", "green", 0) )
         
@@ -303,9 +308,9 @@ class RunGUI(QMainWindow):
         
         # ST
         
-        updateLamp(self, self.ui.st_lamp_j, "JAS/io/st/lo/J", "orange")
-        updateLamp(self, self.ui.st_lamp_a, "JAS/io/st/lo/A", "orange")
-        updateLamp(self, self.ui.st_lamp_s, "JAS/io/st/lo/S", "orange")
+        # updateLamp(self, self.ui.st_lamp_j, "JAS/io/st/lo/J", "orange")
+        # updateLamp(self, self.ui.st_lamp_a, "JAS/io/st/lo/A", "orange")
+        # updateLamp(self, self.ui.st_lamp_s, "JAS/io/st/lo/S", "orange")
         
         
         
