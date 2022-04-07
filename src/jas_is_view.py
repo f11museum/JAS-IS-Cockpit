@@ -62,7 +62,7 @@ def updateLamp(self, lamp, dataref, color):
     font = QFont("Sans")
     font.setPointSize(12)
     lamp.setFont(font)
-    if (self.xp.getDataref(dataref,2) >0):
+    if (self.xp.getDataref(dataref,10) >0):
         lamp.setStyleSheet("background-color: "+color)
     else:
         lamp.setStyleSheet("background-color: #AAAAAA")

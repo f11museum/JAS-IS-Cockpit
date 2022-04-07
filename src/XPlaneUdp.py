@@ -29,29 +29,31 @@ class XPlaneUdp:
                 print("reconnect")
                 self.sendList = []
                 self.dataList = {}
-        try:
-            data, addr = self.sock.recvfrom(1024)
-            # print("received data:")
-            # print(addr)
-            # print(data)
-            header=data[0:5]
-            if(header==b"RREF,"):
-                self.lastDataTimer = current_milli_time()
-                self.connected = True
-                values =data[5:]
-                lenvalue = 8
-                numvalues = int(len(values)/lenvalue)
-                for i in range(0,numvalues):
-                    singledata = data[(5+lenvalue*i):(5+lenvalue*(i+1))]
-                    (idx,value) = struct.unpack("if", singledata)
-                    #print("found values", idx, value)
-                    if idx<len(self.sendList):
-                        if self.sendList[idx] in self.dataList:
-                            self.dataList[self.sendList[idx]] = value
-                            #print("set ",self.sendList[idx], "value", value )
-        except BlockingIOError:
-            #print('no data')
-            pass
+        while(True):
+            try:
+                
+                data, addr = self.sock.recvfrom(1024)
+                # print("received data:")
+                # print(addr)
+                # print(data)
+                header=data[0:5]
+                if(header==b"RREF,"):
+                    self.lastDataTimer = current_milli_time()
+                    self.connected = True
+                    values =data[5:]
+                    lenvalue = 8
+                    numvalues = int(len(values)/lenvalue)
+                    for i in range(0,numvalues):
+                        singledata = data[(5+lenvalue*i):(5+lenvalue*(i+1))]
+                        (idx,value) = struct.unpack("if", singledata)
+                        #print("found values", idx, value)
+                        if idx<len(self.sendList):
+                            if self.sendList[idx] in self.dataList:
+                                self.dataList[self.sendList[idx]] = value
+                                #print("set ",self.sendList[idx], "value", value )
+            except:
+                #print('no data')
+                break
         
         
     def sendDataref(self, dataref, value):
@@ -104,4 +106,3 @@ class XPlaneUdp:
         assert(len(message)==413)
         #print(message[:50])
         self.sock.sendto(message, (self.xip, self.xport))
-
