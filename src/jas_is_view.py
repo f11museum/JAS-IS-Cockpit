@@ -264,7 +264,7 @@ class RunGUI(QMainWindow):
         updateLamp(self, self.ui.lamps_gears, "sim/cockpit/switches/gear_handle_status", "lightgreen")
         
         
-        updateText(self, self.ui.text_fuel, "JAS/fuel")
+        updateText(self, self.ui.text_fuel, "JAS/fuel/pct")
         # updateSlider(self, self.ui.spak_roll, "sim/joystick/yoke_roll_ratio", type=2)
         # updateSlider(self, self.ui.spak_pedaler, "sim/joystick/yoke_heading_ratio", type=2)
         # updateSlider(self, self.ui.spak_pitch, "sim/joystick/yoke_pitch_ratio", type=2)
@@ -335,9 +335,9 @@ class RunGUI(QMainWindow):
         self.xp.sendDataref(dataref, 0)   
              
     def buttonTankaFull(self):
-        self.xp.sendDataref("sim/flightmodel/weight/m_fuel1", 2400)
+        self.xp.sendDataref("sim/flightmodel/weight/m_fuel1", 2200)
     def buttonTanka50(self):
-        self.xp.sendDataref("sim/flightmodel/weight/m_fuel1", 1200)
+        self.xp.sendDataref("sim/flightmodel/weight/m_fuel1", 1100)
         
     def autoAFK(self):
         newvalue = float(self.ui.auto_afk_text.value()) / 1.85200
