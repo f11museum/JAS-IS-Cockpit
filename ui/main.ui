@@ -653,14 +653,14 @@
       <item row="3" column="0">
        <widget class="QPushButton" name="mfdButton11">
         <property name="text">
-         <string>+</string>
+         <string>Karta zoom in</string>
         </property>
        </widget>
       </item>
       <item row="4" column="0">
        <widget class="QPushButton" name="mfdButton12">
         <property name="text">
-         <string>-</string>
+         <string>Karta zoom ut</string>
         </property>
        </widget>
       </item>

@@ -22,7 +22,7 @@ import XPlaneUdp
 
 #LISTEN_PORT = 49006
 SEND_PORT = 49000
-XPLANE_IP = "192.168.0.18"
+XPLANE_IP = "192.168.0.130"
 
 
 # Egna  funktioner
