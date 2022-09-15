@@ -12,7 +12,7 @@ set PYTHONPATH=%PyRunTime%\python-current;%PyRunTime%\python-current\lib;%PyRunT
 
 set QT_SCALE_FACTOR=1.5
 python --version
-python src/jas_is_view.py --ip 192.168.0.130
+start python src/jas_is_view.py --ip 192.168.0.130
 
 if errorlevel 1 (
    echo Failure Reason Given is %errorlevel%
